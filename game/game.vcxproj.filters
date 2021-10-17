@@ -18,11 +18,19 @@
     <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AllegroUtil.cpp">
+    <ClCompile Include="AllegroBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AllegroBase.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
