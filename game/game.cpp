@@ -140,6 +140,13 @@ AllegroApp::AllegroApp() {
     figureList.generateRandomFigures();
 }
 
+AllegroApp::~AllegroApp() {}
+
+AllegroApp& AllegroApp::Instance() {
+    static AllegroApp instance;
+    return instance;
+}
+
 void AllegroApp::Fps()
 {
     figureList.nextFrame();
@@ -151,16 +158,15 @@ void AllegroApp::Draw()
 }
 
 
-AllegroApp App;
 FigureList figureList;
 int main(int argc, char** argv)
 {
-    if (!App.Init(SCREEN_W, SCREEN_H, FPS))
+    if (!AllegroApp::Instance().Init(SCREEN_W, SCREEN_H, FPS))
     {
-        App.Destroy();
+        AllegroApp::Instance().Destroy();
         return 1;
     }
 
-    App.Run();
+    AllegroApp::Instance().Run();
     return 0;
 }

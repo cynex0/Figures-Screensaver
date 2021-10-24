@@ -53,7 +53,7 @@ private:
 
 public:
     FigureList();
-    ~FigureList();
+    virtual ~FigureList();
 
     void addFig(Figure* fig);
     void generateRandomFigures();
@@ -71,10 +71,12 @@ public:
 class AllegroApp : public AllegroBase
 {
 private:
+    AllegroApp();
+    virtual ~AllegroApp();
     FigureList figureList;
 
 public:
-    AllegroApp();
+    static AllegroApp& Instance();
 
     virtual void Fps();
     virtual void Draw();
