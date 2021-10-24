@@ -49,7 +49,7 @@ class FigureList
 {
 private:
     Figure* figures[MAX_FIGS];
-    unsigned int size_;
+    int size_;
 
 public:
     FigureList();
@@ -59,6 +59,13 @@ public:
     void generateRandomFigures();
     void nextFrame();
     void drawAll();
+};
+
+class FigureFactory
+{
+public:
+    static Figure* CreateRandomSquare();
+    static Figure* CreateRandomCircle();
 };
 
 class AllegroApp : public AllegroBase

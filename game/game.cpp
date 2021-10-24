@@ -98,18 +98,13 @@ void FigureList::addFig(Figure *fig) {
 }
 
 void FigureList::generateRandomFigures() {
-    double rand_x, rand_y, rand_size;
     size_ = rand() % MAX_FIGS + 1;       
     for (int i = 0; i < size_; ++i)
     {
-        rand_x = rand() % SCREEN_W;
-        rand_y = rand() % SCREEN_H;
-        rand_size = rand() % MAX_FIG_SIZE;
         if (rand() % 2 == 0) {
-            figures[i] = new Square(rand_x, rand_y, rand_size);
-        }
-        else {
-            figures[i] = new Circle(rand_x, rand_y, rand_size);
+            figures[i] = FigureFactory::CreateRandomSquare();
+        } else {
+            figures[i] = FigureFactory::CreateRandomCircle();
         }
     }
 }
@@ -132,6 +127,13 @@ void FigureList::drawAll()
     }
 }
 
+Figure* FigureFactory::CreateRandomSquare() {
+    return new Square(rand() % SCREEN_W, rand() % SCREEN_H, rand() % MAX_FIG_SIZE);
+}
+
+Figure* FigureFactory::CreateRandomCircle() {
+    return new Circle(rand() % SCREEN_W, rand() % SCREEN_H, rand() % MAX_FIG_SIZE);
+}
 
 AllegroApp::AllegroApp() {
     srand(time(NULL));
