@@ -5,10 +5,6 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 
-const int FPS = 60;
-const int SCREEN_W = 800;
-const int SCREEN_H = 600;
-
 class AllegroBase
 {
 public:
