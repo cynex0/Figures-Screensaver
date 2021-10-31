@@ -1,15 +1,21 @@
 #include "Square.h"
 #include "Figure.h"
 #include "AllegroApp.h"
+#include <iostream>
+
 
 Square::Square(double x, double y, double a) :
     Figure(x, y),
     a_(a)
 {
     half = a_ / 2;
-    center_to_edge = half;
 }
 Square::~Square() {};
+
+double Square::getCollisionDistance()
+{
+    return half;
+}
 
 void Square::Draw()
 {

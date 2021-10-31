@@ -5,10 +5,13 @@
 Circle::Circle(double x, double y, double r) :
     Figure(x, y),
     r_(r)
-{
-    center_to_edge = r_;
-}
+{}
+
 Circle::~Circle() {};
+
+double Circle::getCollisionDistance() {
+    return r_;
+}
 
 void Circle::Draw()
 {

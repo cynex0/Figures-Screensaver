@@ -187,6 +187,7 @@
     <ClInclude Include="FigureFactory.h" />
     <ClInclude Include="FigureList.h" />
     <ClInclude Include="constants.h" />
+    <ClInclude Include="ISerializable.h" />
     <ClInclude Include="Square.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

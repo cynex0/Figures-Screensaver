@@ -9,5 +9,6 @@ public:
     Circle(double x, double y, double r);
     virtual ~Circle();
 
+    virtual double getCollisionDistance();
     virtual void Draw();
 };

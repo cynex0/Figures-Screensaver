@@ -46,10 +46,10 @@ void FigureList::nextFrame()
     for (int i = 0; i < size_; ++i)
     {
         figures[i]->Move();
-        figures[i]->CollideWithBounds();
         for (int j = i + 1; j < size_; ++j) {
-            figures[i]->CollideWithFigure(*figures[j]);
+            figures[i]->CollideWithFigure(figures[j]);
         }
+        figures[i]->CollideWithBounds();
     }
 }
 

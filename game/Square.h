@@ -10,5 +10,6 @@ public:
     Square(double x, double y, double a);
     virtual ~Square();
 
+    virtual double getCollisionDistance();
     virtual void Draw();
 };
