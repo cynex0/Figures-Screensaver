@@ -167,15 +167,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AllegroApp.cpp" />
     <ClCompile Include="AllegroBase.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Figure.cpp" />
+    <ClCompile Include="FigureFactory.cpp" />
+    <ClCompile Include="FigureList.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="Square.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AllegroApp.h" />
     <ClInclude Include="AllegroBase.hpp" />
-    <ClInclude Include="game.hpp" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Figure.h" />
+    <ClInclude Include="FigureFactory.h" />
+    <ClInclude Include="FigureList.h" />
+    <ClInclude Include="constants.h" />
+    <ClInclude Include="ISerializable.h" />
+    <ClInclude Include="Square.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
