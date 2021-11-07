@@ -10,7 +10,7 @@ double StringParser::valFromStr(const string& s, const string& key) {
             res = s.substr(pos + key.length(), s.find(',', pos) - pos - key.length()); //get substring between key and next ','
         } 
         else {
-            res = s.substr(pos + key.length(), s.length() - pos - key.length()); //get substring between key and next ','
+            res = s.substr(pos + key.length(), s.length() - pos - key.length()); //get substring between key and EOL
         }
     }
     return stod(res);
