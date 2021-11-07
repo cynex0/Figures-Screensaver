@@ -4,6 +4,7 @@
 #include "Figure.h"
 #include "Square.h"
 #include "Circle.h"
+#include "FigureFactory.h"
 
 
 AllegroApp::AllegroApp() {
@@ -38,24 +39,7 @@ void AllegroApp::OnKeyDown(const ALLEGRO_KEYBOARD_EVENT & keyboard)
     else if (keyboard.keycode == ALLEGRO_KEY_I) {
         string input = "";
         getline(cin, input);
-
-        Figure* f = 0;
-        const string& figureType = input.substr(0, input.find(':'));
-        const string& values = input.substr(input.find(':') + 1);
-
-        if (figureType == "Square") {
-            f = new Square();
-        }
-        else if (figureType == "Circle") {
-            f = new Circle();
-        }
-
-        input.erase(0, input.find(':') + 1);
-        if (f != 0) {
-            f->FromString(values);
-        }
-
-        figureList.addFig(f);
+        figureList.addFig(FigureFactory::CreateFromString(input));
     }
 
     else if (keyboard.keycode == ALLEGRO_KEY_O) {
