@@ -1,6 +1,7 @@
 #pragma once
+#include "ISerializable.h"
 
-class Figure {
+class Figure: public ISerializable {
 protected:
     double x_;
     double y_;
@@ -8,8 +9,12 @@ protected:
     double dy_;
 
 public:
+    Figure();
     Figure(double x, double y);
     virtual ~Figure();
+
+    void setX(double x);
+    void setY(double y);
 
     virtual double getCollisionDistance() = 0;
     virtual void Draw();

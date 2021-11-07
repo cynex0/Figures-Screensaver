@@ -3,7 +3,7 @@
 #include "Circle.h"
 #include "Square.h"
 #include "Figure.h"
-#include <windows.h>
+#include <iostream>
 
 Figure* FigureFactory::CreateRandomSquare() {
     return new Square(rand() % SCREEN_W, rand() % SCREEN_H, rand() % MAX_FIG_SIZE);

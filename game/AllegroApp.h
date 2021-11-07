@@ -14,4 +14,5 @@ public:
 
     virtual void Fps();
     virtual void Draw();
+    virtual void OnKeyDown(const ALLEGRO_KEYBOARD_EVENT& keyboard);
 };

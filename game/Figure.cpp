@@ -2,6 +2,13 @@
 #include "constants.h"
 #include <windows.h>
 
+Figure::Figure(){
+    x_ = 0;
+    y_ = 0;
+    dx_ = 10.0 - rand() % 21;
+    dy_ = 10.0 - rand() % 21;
+}
+
 Figure::Figure(double x, double y) :
     x_(x),
     y_(y)
@@ -9,7 +16,16 @@ Figure::Figure(double x, double y) :
     dx_ = 10.0 - rand() % 21;
     dy_ = 10.0 - rand() % 21;
 }
+
 Figure::~Figure() {};
+
+void Figure::setX(double x) {
+    x_ = x;
+}
+
+void Figure::setY(double y) {
+    y_ = y;
+}
 
 void Figure::Draw() {};
 void Figure::Move()
@@ -52,16 +68,19 @@ void Figure::CollideWithFigure(Figure *other) {
         //switch velocities
         double temp_d = dx_;
         dx_ = other->dx_; other->dx_ = temp_d;
+
+        temp_d = dy_;
+        dy_ = other->dy_; other->dy_ = temp_d;
         
         //unstuck algorithm
-        if (x_ < other->x_) {
+        /*if (x_ < other->x_) {
             other->x_ = x_ + collisionDistance + other_collisionDistance;
         }
         else {
             other->x_ = x_ - collisionDistance - other_collisionDistance;
         }
 
-        /*if (y_ > other->y_) {
+        if (y_ > other->y_) {
             other->y_ = y_ - collisionDistance - other_collisionDistance;
         }
         else {
