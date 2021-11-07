@@ -1,6 +1,7 @@
 #include "Square.h"
 #include "Figure.h"
 #include "AllegroApp.h"
+#include "StringParser.h"
 #include <iostream>
 
 
@@ -23,25 +24,9 @@ string Square::ToString() {
 }
 
 void Square::FromString(string s) {
-    s += ','; //to indicate EOL
-    string x = "", y = "", size = "";
-    int pos = 0;
-    while ((pos = s.find(',')) != std::string::npos) { // iterate with substrings divided by ','
-        if (s.substr(0, pos).find('x') != std::string::npos) {
-            x = s.substr(s.find("=") + 1, pos - s.find("x=") - 2); //get substring between 'x=' and ','
-        }
-        if (s.substr(0, pos).find('y') != std::string::npos) {
-            y = s.substr(s.find("=") + 1, pos - s.find("y=") - 2);
-        }
-        if (s.substr(0, pos).find("side") != std::string::npos)
-        {
-            size = s.substr(s.find("=") + 1, pos - s.find("=") - 1);
-        }
-        s.erase(0, pos + 1);
-    }
-    x_ = stod(x);
-    y_ = stod(y);
-    a_ = stod(size);
+    x_ = StringParser::valFromStr(s, "x=");
+    y_ = StringParser::valFromStr(s, "y=");
+    a_ = StringParser::valFromStr(s, "side=");
 }
 
 double Square::getCollisionDistance()

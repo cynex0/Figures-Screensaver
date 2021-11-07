@@ -175,6 +175,7 @@
     <ClCompile Include="FigureList.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="Square.cpp" />
+    <ClCompile Include="StringParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,6 +190,7 @@
     <ClInclude Include="constants.h" />
     <ClInclude Include="ISerializable.h" />
     <ClInclude Include="Square.h" />
+    <ClInclude Include="StringParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
