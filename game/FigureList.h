@@ -8,12 +8,15 @@ private:
     Figure* figures[MAX_FIGS];
     int size_;
 
-public:
+public:  
     FigureList();
     virtual ~FigureList();
 
     void addFig(Figure* fig);
+    Figure* getFig(int i);
+    int getSize();
     void generateRandomFigures();
-    void nextFrame();
+
+    void moveAll();
     void drawAll();
 };

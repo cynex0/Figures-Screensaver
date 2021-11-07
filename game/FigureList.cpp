@@ -1,9 +1,9 @@
 #include "constants.h"
 #include "FigureList.h"
 #include "FigureFactory.h"
-#include "Figure.h"
 #include "AllegroApp.h"
 #include <windows.h>
+#include <iostream>
 
 FigureList::FigureList() :
     size_(0)
@@ -19,6 +19,14 @@ FigureList::~FigureList() {
         delete figures[i];
         figures[i] = 0;
     }
+}
+
+Figure* FigureList::getFig(int i) {
+    return figures[i];
+}
+
+int FigureList::getSize() {
+    return size_;
 }
 
 void FigureList::addFig(Figure* fig) {
@@ -41,7 +49,7 @@ void FigureList::generateRandomFigures() {
     }
 }
 
-void FigureList::nextFrame()
+void FigureList::moveAll() 
 {
     for (int i = 0; i < size_; ++i)
     {
@@ -61,3 +69,4 @@ void FigureList::drawAll()
         figures[i]->Draw();
     }
 }
+
