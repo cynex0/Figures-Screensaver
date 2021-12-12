@@ -1,16 +1,16 @@
 #pragma once
 #include "ISerializable.h"
+#include "Point.h"
 
 class Figure: public ISerializable {
 protected:
-    double x_;
-    double y_;
-    double dx_;
-    double dy_;
+    Point pos;
+    Point vel;
 
 public:
     Figure();
     Figure(double x, double y);
+    Figure(Point pos_);
     virtual ~Figure();
 
     void setX(double x);
