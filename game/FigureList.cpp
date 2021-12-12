@@ -53,11 +53,11 @@ void FigureList::moveAll()
 {
     for (int i = 0; i < size_; ++i)
     {
-        figures[i]->Move();
         for (int j = i + 1; j < size_; ++j) {
             figures[i]->CollideWithFigure(figures[j]);
         }
         figures[i]->CollideWithBounds();
+        figures[i]->Move();
     }
 }
 

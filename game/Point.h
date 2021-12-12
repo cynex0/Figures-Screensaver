@@ -9,6 +9,8 @@ public:
 	~Point();
 
 	Point operator=(Point p);
+	Point operator+(Point p);
+	Point operator-(Point p);
 	Point operator+=(Point p);
 	Point operator-=(Point p);
 };

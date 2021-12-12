@@ -58,46 +58,42 @@ void Figure::CollideWithBounds() // for symmetrical figures only
     }
 }
 
-void Figure::CollideWithFigure(Figure *other) {
+void Figure::CollideWithFigure(Figure* other) {
     double collisionDistance = getCollisionDistance();
     double other_collisionDistance = other->getCollisionDistance();
 
-    if ((pos.x - collisionDistance < other->pos.x + other_collisionDistance) &&
-        (pos.x + collisionDistance > other->pos.x - other_collisionDistance) &&
-        (pos.y - collisionDistance < other->pos.y + other_collisionDistance) &&
-        (pos.y + collisionDistance > other->pos.y - other_collisionDistance))
-    {
-        //switch velocities
+    Point delta;
+    delta = other->pos - pos;
+
+    Point intersect;
+	intersect.x = abs(delta.x) - (other_collisionDistance + collisionDistance);
+	intersect.y = abs(delta.y) - (other_collisionDistance + collisionDistance);
+
+	if (intersect.x < 0.0 && intersect.y < 0.0) { //collision detected
         Point temp_vel = vel;
-        vel = other->vel;
-        other->vel = temp_vel;
-        
-        //unstuck algorithm
-        /*if (x_ < other->x_) {
-            other->x_ = x_ + collisionDistance + other_collisionDistance;
-        }
-        else {
-            other->x_ = x_ - collisionDistance - other_collisionDistance;
-        }
-
-        if (y_ > other->y_) {
-            other->y_ = y_ - collisionDistance - other_collisionDistance;
-        }
-        else {
-            other->y_ = y_ + collisionDistance + other_collisionDistance;
-        }*/
-
-         /*conservation of energy(not working!)
-         double new_dx1 = (center_to_edge - other.center_to_edge) * dx_ /
-             (center_to_edge + other.center_to_edge);
-         double new_dx2 = 2 * center_to_edge * dx_ /
-             (center_to_edge + other.center_to_edge);
-         double new_dy1 = (center_to_edge - other.center_to_edge) * dy_ /
-             (center_to_edge + other.center_to_edge);
-         double new_dy2 = 2 * center_to_edge * dy_ /
-             (center_to_edge + other.center_to_edge);
-         dx_ = new_dx1; other.dx_ = new_dx2;
-         dy_ = new_dy1; other.dy_ = new_dy2;
-         */
-    }
+		if (intersect.x > intersect.y) { //collision on x axis
+            //push out of collision
+			if (delta.x > 0.0) { 
+				pos += Point(intersect.x, 0);
+			}
+			else {
+				pos -= Point(intersect.x, 0);
+			}
+            //switch X velocity
+            vel.x = other->vel.x;
+            other->vel.x = temp_vel.x;
+		}
+		else { //collision on y axis
+            //push out of collision
+			if (delta.y > 0.0) {
+				pos += Point(0, delta.y);
+			}
+			else {
+				pos -= Point(0, delta.y);
+			}
+		}
+        //switch X velocity
+        vel.y = other->vel.y;
+        other->vel.y = temp_vel.y;
+	}
 }
