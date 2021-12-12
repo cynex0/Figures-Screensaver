@@ -2,57 +2,59 @@
 #include "constants.h"
 #include <windows.h>
 
-Figure::Figure(){
-    x_ = 0;
-    y_ = 0;
-    dx_ = 10.0 - rand() % 21;
-    dy_ = 10.0 - rand() % 21;
+Figure::Figure():
+    pos()
+{
+    vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
 }
 
 Figure::Figure(double x, double y) :
-    x_(x),
-    y_(y)
+    pos(x,y)
 {
-    dx_ = 10.0 - rand() % 21;
-    dy_ = 10.0 - rand() % 21;
+    vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
+}
+
+Figure::Figure(Point pos_):
+    pos(pos_)
+{
+    vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
 }
 
 Figure::~Figure() {};
 
 void Figure::setX(double x) {
-    x_ = x;
+    pos.x = x;
 }
 
 void Figure::setY(double y) {
-    y_ = y;
+    pos.y = y;
 }
 
 void Figure::Draw() {};
 void Figure::Move()
 {
-    x_ += dx_;
-    y_ += dy_;
+    pos += vel;
 };
 
 void Figure::CollideWithBounds() // for symmetrical figures only
 {
     double collisionDistance = getCollisionDistance();
 
-    if (x_ - collisionDistance <= 0) {
-        dx_ = -dx_;
-        x_ = collisionDistance;
+    if (pos.x - collisionDistance <= 0) {
+        vel.x = -vel.x;
+        pos.x = collisionDistance;
     }
-    if (x_ + collisionDistance >= SCREEN_W) {
-        dx_ = -dx_;
-        x_ = SCREEN_W - collisionDistance;
+    if (pos.x + collisionDistance >= SCREEN_W) {
+        vel.x = -vel.x;
+        pos.x = SCREEN_W - collisionDistance;
     }
-    if (y_ - collisionDistance <= 0) {
-        dy_ = -dy_;
-        y_ = collisionDistance;
+    if (pos.y - collisionDistance <= 0) {
+        vel.y = -vel.y;
+        pos.y = collisionDistance;
     }
-    if (y_ + collisionDistance >= SCREEN_H) {
-        dy_ = -dy_;
-        y_ = SCREEN_H - collisionDistance;
+    if (pos.y + collisionDistance >= SCREEN_H) {
+        vel.y = -vel.y;
+        pos.y = SCREEN_H - collisionDistance;
     }
 }
 
@@ -60,17 +62,15 @@ void Figure::CollideWithFigure(Figure *other) {
     double collisionDistance = getCollisionDistance();
     double other_collisionDistance = other->getCollisionDistance();
 
-    if ((x_ - collisionDistance < other->x_ + other_collisionDistance) &&
-        (x_ + collisionDistance > other->x_ - other_collisionDistance) &&
-        (y_ - collisionDistance < other->y_ + other_collisionDistance) &&
-        (y_ + collisionDistance > other->y_ - other_collisionDistance))
+    if ((pos.x - collisionDistance < other->pos.x + other_collisionDistance) &&
+        (pos.x + collisionDistance > other->pos.x - other_collisionDistance) &&
+        (pos.y - collisionDistance < other->pos.y + other_collisionDistance) &&
+        (pos.y + collisionDistance > other->pos.y - other_collisionDistance))
     {
         //switch velocities
-        double temp_d = dx_;
-        dx_ = other->dx_; other->dx_ = temp_d;
-
-        temp_d = dy_;
-        dy_ = other->dy_; other->dy_ = temp_d;
+        Point temp_vel = vel;
+        vel = other->vel;
+        other->vel = temp_vel;
         
         //unstuck algorithm
         /*if (x_ < other->x_) {

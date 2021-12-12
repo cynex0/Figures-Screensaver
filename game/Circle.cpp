@@ -22,13 +22,13 @@ void Circle::setR(double r) {
 
 string Circle::ToString() {
     char buffer[150];
-    int n = sprintf_s(buffer, "Circle: x=%f, y=%f, radius=%f", x_, y_, r_);
+    int n = sprintf_s(buffer, "Circle: x=%f, y=%f, radius=%f", pos.x, pos.y, r_);
     return buffer;
 }
 
 void Circle::FromString(string s) {
-    x_ = StringParser::valFromStr(s, "x=");
-    y_ = StringParser::valFromStr(s, "y=");
+    pos.x = StringParser::valFromStr(s, "x=");
+    pos.y = StringParser::valFromStr(s, "y=");
     r_ = StringParser::valFromStr(s, "radius=");
 }
 
@@ -39,6 +39,6 @@ double Circle::getCollisionDistance() {
 void Circle::Draw()
 {
     if (r_ != 0) {
-        al_draw_filled_circle(x_, y_, r_, al_map_rgb(0, 255, 0));
+        al_draw_filled_circle(pos.x, pos.y, r_, al_map_rgb(0, 255, 0));
     }
 }
