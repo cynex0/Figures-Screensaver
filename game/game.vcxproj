@@ -174,6 +174,7 @@
     <ClCompile Include="FigureFactory.cpp" />
     <ClCompile Include="FigureList.cpp" />
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="StringParser.cpp" />
   </ItemGroup>
@@ -189,6 +190,7 @@
     <ClInclude Include="FigureList.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="ISerializable.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="StringParser.h" />
   </ItemGroup>
