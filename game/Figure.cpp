@@ -5,24 +5,21 @@
 Figure::Figure():
     pos()
 {
-    movability = 1.0;
-    vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
+    vel = Point(6.0 - rand() % 13, 6.0 - rand() % 13);
     color = al_map_rgb(0, 0, 0);
 }
 
 Figure::Figure(double x, double y) :
     pos(x,y)
 {
-    movability = 1.0;
-    vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
+    vel = Point(6.0 - rand() % 13, 6.0 - rand() % 13);
     color = al_map_rgb(0, 0, 0);
 }
 
 Figure::Figure(Point pos_):
     pos(pos_)
 {
-    movability = 1.0;
-    vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
+    vel = Point(6.0 - rand() % 13, 6.0 - rand() % 13);
     color = al_map_rgb(0, 0, 0);
 }
 

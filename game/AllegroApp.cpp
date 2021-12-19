@@ -18,7 +18,6 @@ AllegroApp::AllegroApp() {
     }
     player->setColor(al_map_rgb(0, 0, 255));
     player->setVel(Point(0, 0));
-    player->movability = 0.0;
     figureList.addFig(player);
     figureList.generateRandomFigures();
 }

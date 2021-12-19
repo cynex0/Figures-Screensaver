@@ -10,8 +10,6 @@ protected:
     ALLEGRO_COLOR color;
 
 public:
-    float movability;
-
     Figure();
     Figure(double x, double y);
     Figure(Point pos_);

@@ -32,7 +32,6 @@ Point Point::operator-(Point p)
 }
 
 
-
 Point Point::operator+=(const Point p)
 {
 	x += p.x;
