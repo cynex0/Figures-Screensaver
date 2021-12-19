@@ -8,21 +8,12 @@
 FigureList::FigureList() :
     size_(0)
 {
-    for (int i = 0; i < MAX_FIGS; ++i) {
-        figures[i] = 0;
-    }
 }
 
-FigureList::~FigureList() {
-    for (int i = 0; i < size_; ++i)
-    {
-        delete figures[i];
-        figures[i] = 0;
-    }
-}
+FigureList::~FigureList() {}
 
 Figure* FigureList::getFig(int i) {
-    return figures[i];
+    return figures.at(i);
 }
 
 int FigureList::getSize() {
@@ -30,10 +21,7 @@ int FigureList::getSize() {
 }
 
 void FigureList::addFig(Figure* fig) {
-    if (size_ < MAX_FIGS) {
-        figures[size_] = fig;
-        size_++;
-    }
+    figures.push_back(fig);
 }
 
 void FigureList::generateRandomFigures() {
@@ -41,32 +29,32 @@ void FigureList::generateRandomFigures() {
     for (int i = 0; i < size_; ++i)
     {
         if (rand() % 2 == 0) {
-            figures[i] = FigureFactory::CreateRandomSquare();
+            figures.push_back(FigureFactory::CreateRandomSquare());
         }
         else {
-            figures[i] = FigureFactory::CreateRandomCircle();
+            figures.push_back(FigureFactory::CreateRandomCircle());
         }
     }
 }
 
 void FigureList::moveAll() 
 {
-    for (int i = 0; i < size_; ++i)
-    {
-        for (int j = i + 1; j < size_; ++j) {
-            figures[i]->CollideWithFigure(figures[j]);
-        }
-        figures[i]->CollideWithBounds();
-        figures[i]->Move();
+    std::vector<Figure*>::iterator it = figures.begin();
+    std::vector<Figure*>::iterator it2;
+
+    for (it; it != figures.end(); it++) {
+        Figure* fig = *it;
+        for (it2 = it; it2 != figures.end(); it2++)
+            fig->CollideWithFigure(*it2);
+        fig->CollideWithBounds();
+        fig->Move();
     }
 }
 
 void FigureList::drawAll()
 {
     al_clear_to_color(al_map_rgb(0, 0, 0));
-    for (int i = 0; i < size_; ++i)
-    {
-        figures[i]->Draw();
-    }
+    for (Figure* fig : figures)
+        fig->Draw();
 }
 

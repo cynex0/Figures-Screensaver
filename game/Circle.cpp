@@ -7,12 +7,15 @@ Circle::Circle():
     Figure()
 {
     r_ = 0;
+    color = al_map_rgb(0, 255, 0);
 }
 
 Circle::Circle(double x, double y, double r) :
     Figure(x, y),
     r_(r)
-{}
+{
+    color = al_map_rgb(0, 255, 0);
+}
 
 Circle::~Circle() {};
 
@@ -39,6 +42,6 @@ double Circle::getCollisionDistance() {
 void Circle::Draw()
 {
     if (r_ != 0) {
-        al_draw_filled_circle(pos.x, pos.y, r_, al_map_rgb(0, 255, 0));
+        al_draw_filled_circle(pos.x, pos.y, r_, color);
     }
 }

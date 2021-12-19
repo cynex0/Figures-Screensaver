@@ -5,32 +5,44 @@
 Figure::Figure():
     pos()
 {
+    movability = 1.0;
     vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
+    color = al_map_rgb(0, 0, 0);
 }
 
 Figure::Figure(double x, double y) :
     pos(x,y)
 {
+    movability = 1.0;
     vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
+    color = al_map_rgb(0, 0, 0);
 }
 
 Figure::Figure(Point pos_):
     pos(pos_)
 {
+    movability = 1.0;
     vel = Point(10.0 - rand() % 21, 10.0 - rand() % 21);
+    color = al_map_rgb(0, 0, 0);
 }
 
-Figure::~Figure() {};
+Figure::~Figure() {}
 
-void Figure::setX(double x) {
-    pos.x = x;
+void Figure::setPos(Point pos_)
+{
+    pos = pos_;
 }
 
-void Figure::setY(double y) {
-    pos.y = y;
+void Figure::setVel(Point vel_)
+{
+    vel = vel_;
 }
 
-void Figure::Draw() {};
+void Figure::setColor(ALLEGRO_COLOR color_)
+{
+    color = color_;
+}
+
 void Figure::Move()
 {
     pos += vel;
@@ -40,19 +52,19 @@ void Figure::CollideWithBounds() // for symmetrical figures only
 {
     double collisionDistance = getCollisionDistance();
 
-    if (pos.x - collisionDistance <= 0) {
+    if (pos.x - collisionDistance < 0) {
         vel.x = -vel.x;
         pos.x = collisionDistance;
     }
-    if (pos.x + collisionDistance >= SCREEN_W) {
+    if (pos.x + collisionDistance > SCREEN_W) {
         vel.x = -vel.x;
         pos.x = SCREEN_W - collisionDistance;
     }
-    if (pos.y - collisionDistance <= 0) {
+    if (pos.y - collisionDistance < 0) {
         vel.y = -vel.y;
         pos.y = collisionDistance;
     }
-    if (pos.y + collisionDistance >= SCREEN_H) {
+    if (pos.y + collisionDistance > SCREEN_H) {
         vel.y = -vel.y;
         pos.y = SCREEN_H - collisionDistance;
     }
@@ -79,9 +91,10 @@ void Figure::CollideWithFigure(Figure* other) {
 			else {
 				pos -= Point(intersect.x, 0);
 			}
+
             //switch X velocity
-            vel.x = other->vel.x;
-            other->vel.x = temp_vel.x;
+            vel.x *= -1;
+            other->vel.x *= -1;
 		}
 		else { //collision on y axis
             //push out of collision
@@ -91,9 +104,10 @@ void Figure::CollideWithFigure(Figure* other) {
 			else {
 				pos -= Point(0, delta.y);
 			}
+
+            //switch Y velocity
+            vel.y *= -1;
+            other->vel.y *= -1;
 		}
-        //switch X velocity
-        vel.y = other->vel.y;
-        other->vel.y = temp_vel.y;
 	}
 }

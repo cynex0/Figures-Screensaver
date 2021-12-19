@@ -46,3 +46,15 @@ Point Point::operator-=(const Point p)
 	y -= p.y;
 	return *this;
 }
+
+Point Point::operator*(float d)
+{
+	return Point(this->x*d, this->y*d);
+}
+
+Point Point::operator*=(float d)
+{
+	x *= d;
+	y *= d;
+	return *this;
+}
