@@ -30,6 +30,11 @@ void Figure::setPos(Point pos_)
     pos = pos_;
 }
 
+Point Figure::getPos()
+{
+    return pos;
+}
+
 void Figure::setVel(Point vel_)
 {
     vel = vel_;
@@ -93,13 +98,13 @@ void Figure::CollideWithFigure(Figure* other) {
             vel.x *= -1;
             other->vel.x *= -1;
 		}
-		else { //collision on y axis
+		else if (intersect.x < intersect.y) { //collision on y axis
             //push out of collision
 			if (delta.y > 0.0) {
-				pos += Point(0, delta.y);
+				pos += Point(0, intersect.y);
 			}
 			else {
-				pos -= Point(0, delta.y);
+				pos -= Point(0, intersect.y);
 			}
 
             //switch Y velocity

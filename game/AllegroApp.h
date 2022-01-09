@@ -6,6 +6,8 @@ class AllegroApp : public AllegroBase
 {
 private:
     AllegroApp();
+    AllegroApp(const AllegroApp&) = delete;
+    AllegroApp& operator=(const AllegroApp&) = delete;
     virtual ~AllegroApp();
     FigureList figureList;
     Figure* player;
