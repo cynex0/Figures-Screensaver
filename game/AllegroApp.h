@@ -8,6 +8,8 @@ private:
     AllegroApp();
     virtual ~AllegroApp();
     FigureList figureList;
+    Figure* player;
+    Point newVel;
 
 public:
     static AllegroApp& Instance();

@@ -1,11 +1,12 @@
 #pragma once
 #include "constants.h"
 #include "Figure.h"
+#include <vector>
 
 class FigureList
 {
 private:
-    Figure* figures[MAX_FIGS];
+    std::vector<Figure*> figures;
     int size_;
 
 public:  

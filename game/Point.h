@@ -13,4 +13,6 @@ public:
 	Point operator-(Point p);
 	Point operator+=(Point p);
 	Point operator-=(Point p);
+	Point operator*(float d);
+	Point operator*=(float d);
 };

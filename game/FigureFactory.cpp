@@ -6,11 +6,11 @@
 #include <iostream>
 
 Figure* FigureFactory::CreateRandomSquare() {
-    return new Square(rand() % SCREEN_W, rand() % SCREEN_H, rand() % MAX_FIG_SIZE);
+    return new Square(rand() % SCREEN_W, rand() % SCREEN_H, (rand() % MAX_FIG_SIZE) + 15);
 }
 
 Figure* FigureFactory::CreateRandomCircle() {
-    return new Circle(rand() % SCREEN_W, rand() % SCREEN_H, rand() % MAX_FIG_SIZE);
+    return new Circle(rand() % SCREEN_W, rand() % SCREEN_H, (rand() % MAX_FIG_SIZE) + 15);
 }
 
 Figure* FigureFactory::CreateFromString(string input) {
