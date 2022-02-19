@@ -32,14 +32,14 @@ AllegroApp& AllegroApp::Instance() {
 void AllegroApp::Fps()
 {
     newVel = Point(0, 0);
-    if (IsPressed(ALLEGRO_KEY_W))
+    if (IsPressed(ALLEGRO_KEY_UP))
         newVel += Point(0, -2);
-    else if (IsPressed(ALLEGRO_KEY_S))
+    else if (IsPressed(ALLEGRO_KEY_DOWN))
         newVel += Point(0, 2);
 
-    if (IsPressed(ALLEGRO_KEY_A))
+    if (IsPressed(ALLEGRO_KEY_LEFT))
         newVel += Point(-2, 0);
-    else if (IsPressed(ALLEGRO_KEY_D))
+    else if (IsPressed(ALLEGRO_KEY_RIGHT))
         newVel += Point(2, 0);
     
     figureList.getFig(0)->setVel(newVel);
@@ -70,10 +70,21 @@ void AllegroApp::OnKeyDown(const ALLEGRO_KEYBOARD_EVENT& keyboard)
 
     case ALLEGRO_KEY_O:
     {
-        for (int i = 0; i < figureList.getSize(); ++i)
-        {
-            cout << figureList.getFig(i)->ToString() << endl;
+        for (Figure* fig : figureList.getList()) {
+            std::cout << fig->ToString() << std::endl;
         }
+        break;
+    }
+    case ALLEGRO_KEY_S:
+    {
+        std::vector<int> quadrants;
+        
+        quadrants = figureList.countFigs();          
+        
+        std::cout << "I: " << quadrants[0] << std::endl;
+        std::cout << "II: " << quadrants[1] << std::endl;
+        std::cout << "III: " << quadrants[2] << std::endl;
+        std::cout << "VI: " << quadrants[3] << std::endl;
         break;
     }
     }

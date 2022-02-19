@@ -2,12 +2,16 @@
 #include "FigureList.h"
 #include "FigureFactory.h"
 #include "AllegroApp.h"
+#include <algorithm>
 #include <windows.h>
 #include <iostream>
 
-FigureList::FigureList() :
-    size_(0)
-{
+FigureList::FigureList() {}
+
+FigureList::FigureList(initializer_list<Figure*> init) {
+    for (Figure* fig : init) {
+        figures.push_back(fig);
+    }
 }
 
 FigureList::~FigureList() {}
@@ -16,8 +20,12 @@ Figure* FigureList::getFig(int i) {
     return figures.at(i);
 }
 
+std::vector<Figure*> FigureList::getList() {
+    return figures;
+}
+
 int FigureList::getSize() {
-    return size_;
+    return figures.size();
 }
 
 void FigureList::addFig(Figure* fig) {
@@ -25,8 +33,7 @@ void FigureList::addFig(Figure* fig) {
 }
 
 void FigureList::generateRandomFigures() {
-    size_ = rand() % MAX_FIGS + 1;
-    for (int i = 0; i < size_; ++i)
+    for (int i = 0; i < (rand() % MAX_FIGS + 1); ++i)
     {
         if (rand() % 2 == 0) {
             figures.push_back(FigureFactory::CreateRandomSquare());
@@ -37,14 +44,28 @@ void FigureList::generateRandomFigures() {
     }
 }
 
+std::vector<int> FigureList::countFigs()
+{
+    int s1 = std::count_if(figures.begin(), figures.end(), [](Figure* f)
+        { return (f->getPos().x >= SCREEN_W / 2) && (f->getPos().y <= SCREEN_H / 2); }); //top right
+
+    int s2 = std::count_if(figures.begin(), figures.end(), [](Figure* f)
+        { return (f->getPos().x < SCREEN_W / 2) && (f->getPos().y <= SCREEN_H / 2); }); //top left
+
+    int s3 = std::count_if(figures.begin(), figures.end(), [](Figure* f)
+        { return (f->getPos().x < SCREEN_W / 2) && (f->getPos().y > SCREEN_H / 2); }); //bottom left
+
+    int s4 = std::count_if(figures.begin(), figures.end(), [](Figure* f)
+        { return (f->getPos().x >= SCREEN_W / 2) && (f->getPos().y > SCREEN_H / 2); }); //bottom right
+
+    return {s1, s2, s3, s4};
+}
+
 void FigureList::moveAll() 
 {
-    std::vector<Figure*>::iterator it = figures.begin();
-    std::vector<Figure*>::iterator it2;
-
-    for (it; it != figures.end(); it++) {
+    for (auto it = figures.begin(); it != figures.end(); it++) {
         Figure* fig = *it;
-        for (it2 = it; it2 != figures.end(); it2++)
+        for (auto it2 = it; it2 != figures.end(); it2++)
             fig->CollideWithFigure(*it2);
         fig->CollideWithBounds();
         fig->Move();

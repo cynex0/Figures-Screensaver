@@ -7,16 +7,18 @@ class FigureList
 {
 private:
     std::vector<Figure*> figures;
-    int size_;
 
 public:  
     FigureList();
+    FigureList(initializer_list<Figure*> init);
     virtual ~FigureList();
 
     void addFig(Figure* fig);
     Figure* getFig(int i);
+    std::vector<Figure*> getList();
     int getSize();
     void generateRandomFigures();
+    std::vector<int> countFigs();
 
     void moveAll();
     void drawAll();

@@ -16,6 +16,7 @@ public:
     virtual ~Figure();
 
     void setPos(Point pos_);
+    Point getPos();
     void setVel(Point vel_);
     void setColor(ALLEGRO_COLOR color_);
 

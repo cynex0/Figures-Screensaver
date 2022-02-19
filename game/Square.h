@@ -16,6 +16,6 @@ public:
     virtual string ToString();
     virtual void FromString(string s);
 
-    virtual double getCollisionDistance();
-    virtual void Draw();
+    double getCollisionDistance() override;
+    void Draw() override;
 };
