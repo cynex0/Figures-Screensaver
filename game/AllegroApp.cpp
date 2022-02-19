@@ -78,9 +78,9 @@ void AllegroApp::OnKeyDown(const ALLEGRO_KEYBOARD_EVENT& keyboard)
     case ALLEGRO_KEY_S:
     {
         std::vector<int> quadrants;
-        for (Figure* fig : figureList.getList()) {
-            quadrants = figureList.countFigs();          
-        }
+        
+        quadrants = figureList.countFigs();          
+        
         std::cout << "I: " << quadrants[0] << std::endl;
         std::cout << "II: " << quadrants[1] << std::endl;
         std::cout << "III: " << quadrants[2] << std::endl;
